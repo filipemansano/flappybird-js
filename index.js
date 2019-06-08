@@ -345,7 +345,7 @@ function stop() {
 
     bgSoundSource.stop();
     playSound("dead");
-    document.getElementById('btnStart').style.display = 'block';
+    document.getElementById('btnStart').style.display = 'inline-block';
 }
 
 /**
