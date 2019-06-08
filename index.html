@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        canvas{
+            position: absolute;
+            top:10;
+            left: 10;
+        }
+
+        canvas.dark{
+            background-color: black!important;
+            transition: background-color 0.5s ease;
+        }
+
+        #canvas-panel{
+            z-index: 1;
+            border: 1px solid black;
+            background-color: white;
+            transition: background-color 0.5s ease;
+        }
+
+        #canvas-box{
+            z-index: 2;
+            background-color: transparent;
+        }
+
+        #btnStart {
+            position: absolute;
+            z-index: 3;
+            top: 100px;
+            left: 300px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    
+    <button onclick="javascript:start();" id="btnStart">Iniciar Jogo</button>
+
+    <canvas id="canvas-panel"></canvas>
+    <canvas id="canvas-box"></canvas>
+    
+
+    <script src="index.js"></script>
+</body>
+</html>
