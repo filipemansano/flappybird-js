@@ -21,7 +21,7 @@ let barsToDarkMode = 6; // barras para atilet o dark mode
 let barsToDificultScale = 2; // quantas barras deve consumir para aumentar o nivel
 //////////////// Configurações de jobabilidade ///////////////////
 
-let width = 800; // largura do canvas
+let width = 600; // largura do canvas
 let height = 270; // altura do canvas
 
 let maxLeaf = 110; // espaço minimo para a lacuna das barras
@@ -384,6 +384,14 @@ function verifyBoxAction() {
     drawBox();
 }
 
+function upBox(){
+    boxAction = "up";
+}
+
+function downBox(){
+    boxAction = "down";
+}
+
 function start() {
 
     if(debug){
@@ -415,17 +423,25 @@ function start() {
         createBar(distanceX * maxBar);
     }
 
+    // mobile touch
+    document.body.addEventListener("touchstart", upBox, false);
+
+    // mobile touch end
+    document.body.addEventListener("touchend", downBox, false);
+    document.body.addEventListener("touchcancel", downBox, false);
+    document.body.addEventListener("touchleave", downBox, false);
+
+    // Pressionou barra de espaço
     document.body.onkeydown = function (e) {
-        // barra de espaço
         if (e.keyCode == 32) {
-            boxAction = "up";
+            upBox();
         }
     }
 
+    // Soltou barra de espaço
     document.body.onkeyup = function (e) {
-        // barra de espaço
         if (e.keyCode == 32) {
-            boxAction = "down";
+            downBox();
         }
     }
 

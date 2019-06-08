@@ -2,15 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>FlipBird</title>
 
     <style>
         canvas{
             position: absolute;
-            top:10;
-            left: 10;
+            top: 10px;
+            left: 10px;
+        }
+
+        .buttonContent{
+            width: 604px;
+            text-align: center;
+            position: absolute;
+            top: 120px;
+            z-index: 3;
+        }
+
+        .buttonContent button{
+            font-size: 30px;
+        }
+
+        .content{
+            position: absolute;
+            top: 290px;
+            width: 604px;
+            left: 10px;
+            text-align: center;
         }
 
         canvas.dark{
@@ -29,22 +49,19 @@
             z-index: 2;
             background-color: transparent;
         }
-
-        #btnStart {
-            position: absolute;
-            z-index: 3;
-            top: 100px;
-            left: 300px;
-            font-size: 30px;
-        }
     </style>
 </head>
 <body>
     
-    <button onclick="javascript:start();" id="btnStart">Iniciar Jogo</button>
+    <div class="buttonContent">
+        <button onclick="javascript:start();" id="btnStart">Iniciar Jogo</button>
+    </div>
 
     <canvas id="canvas-panel"></canvas>
     <canvas id="canvas-box"></canvas>
+    <div class="content">
+        (utilize a barra de espaço para controlar o jogo)
+    </div>
     
 
     <script src="index.js"></script>
