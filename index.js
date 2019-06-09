@@ -15,7 +15,7 @@ let level = 0; // nivel inicial do jogo
 let levelMax = 4; // quantidade de niveis disponível (0 conta)
 let speed = [40, 30, 20, 10, 5]; // velocidade do jogo
 let boxGravity = [0.4, 0.6, 0.8, 1, 1.3]; // gravidade que puxa o player para cima ou para baixo
-let barDistance = [200, 180, 160, 140, 120]; // distancia de uma coluna para outra
+let barDistance = [140, 160, 190, 220, 240]; // distancia de uma coluna para outra
 let minLeaf = [100, 90, 80, 70, 60]; // espaço maximo para a lacuna das barras
 let barsToDarkMode = 6; // barras para atilet o dark mode
 let barsToDificultScale = 2; // quantas barras deve consumir para aumentar o nivel
@@ -307,7 +307,7 @@ function colisionCheck() {
     let boxColisionXBegin = box.x;
     let boxColisionXEnd = (box.x + box.w) - 1;
     let boxColisionYBegin = box.y;
-    let boxColisionYEnd = (box.y + box.h) + 1;
+    let boxColisionYEnd = (box.y + box.h) - 1;
 
     let firstBar = bars[0];
 
