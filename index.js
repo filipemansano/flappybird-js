@@ -467,8 +467,8 @@ function start() {
     let maxBar = Math.floor(width / distanceX);
 
     // criando as barras iniciais
-    for (maxBar; maxBar >= 1; maxBar--) {
-        createBar(distanceX * maxBar);
+    for (let i = (maxBar - 1); i >= 1; i--) {
+        createBar(distanceX * i);
     }
 
     // mobile touch
