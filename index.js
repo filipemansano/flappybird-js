@@ -9,6 +9,11 @@ class Component {
 }
 
 let debug = true;
+let mobile = window.mobileAndTabletcheck;
+
+if(debug){
+    console.log(mobile ? "Mobile" : "Desktop");
+}
 
 //////////////// Configurações de jobabilidade ///////////////////
 let level = 0; // nivel inicial do jogo
@@ -22,7 +27,7 @@ let barsToNextLevel = [1, 2, 5, 10]; // quantas barras deve consumir para aument
 //////////////// Configurações de jobabilidade ///////////////////
 
 let width = window.innerWidth - 20; // largura do canvas
-let height = window.mobileAndTabletcheck ? window.innerHeight - 20 : 270; // altura do canvas
+let height = mobile ? window.innerHeight : 270; // altura do canvas
 
 let maxLeaf = 110; // espaço minimo para a lacuna das barras
 
@@ -226,7 +231,7 @@ function drawArea() {
 
     // pegando a cor atual das barras
     let currentBarColor = barColor[currentColorScheme];
-    let currentScoreFont = scoreColor[currentColorScheme];
+    let currentScoreColor = scoreColor[currentColorScheme];
 
     canvasArea.clearRect(0, 0, width, height);
 
@@ -241,11 +246,10 @@ function drawArea() {
         canvasArea.fillRect(bar.bottom.x, bar.bottom.y, bar.bottom.w, bar.bottom.h);
     }
 
-    let thousandPoint = parseInt(score / 1000);
 
     canvasArea.font = scoreFont;
-    canvasArea.fillStyle = currentScoreFont;
-    canvasArea.fillText("Score: " + ++score, (width - 150) - (thousandPoint * 12), 30);
+    canvasArea.fillStyle = currentScoreColor;
+    canvasArea.fillText("Score: " + ++score, width - 180, 30);
 
     canvasArea.fillText("Nível: " + (level + 1), 10, 30);
 }
