@@ -7,10 +7,39 @@
     <title>FlipBird</title>
 
     <style>
+
+        .content{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #background {
+            background-image: url('images/background.jpg');
+            background-repeat: repeat-x;
+            background-color: black;
+            background-position-x: -10px;
+            background-position-y: -193px;
+            z-index: 0;
+        }
+
+        .dark-bg{
+            background-image: url('images/background-dark.jpg')!important;
+        }
+
+        button {
+            background-color: green;
+            border: none;
+            color: white;
+            padding: 13px;
+            border-radius: 6px;
+        }
+
         canvas{
             position: absolute;
             top: 10px;
             left: 10px;
+            z-index: 1;
         }
 
         .buttonContent{
@@ -25,31 +54,21 @@
             font-size: 30px;
         }
 
-        .content{
-            position: absolute;
-            top: 290px;
-            width: 97%;
-            left: 10px;
+        .helper-text{
             text-align: center;
         }
 
         .som {
             position: absolute;
             right: 11px;
-            top: -44px;
+            top: -70px;
             z-index: 5;
             font-size: 17px;
-        }
-
-        canvas.dark{
-            background-color: black!important;
-            transition: background-color 0.5s ease;
         }
 
         #canvas-panel{
             z-index: 1;
             border: 1px solid black;
-            background-color: white;
             transition: background-color 0.5s ease;
         }
 
@@ -65,9 +84,11 @@
         <button onclick="javascript:start();" id="btnStart">Iniciar Jogo</button>
     </div>
 
-    <canvas id="canvas-panel"></canvas>
-    <canvas id="canvas-box"></canvas>
-    <div class="content">
+    <div class="content" id="background"></div>
+    <canvas class="content" id="canvas-panel"></canvas>
+    <canvas class="content" id="canvas-box"></canvas>
+
+    <div class="content helper-text" id="helper-text">
         <button class="som" onclick="switchSound();this.blur();">Som: <span id="soundController">On</span></button>
         (utilize a barra de espaço para controlar o jogo)
     </div>

@@ -22,17 +22,19 @@ let speed = [20, 15, 10, 5, 3]; // velocidade do jogo
 let boxGravity = [0.8, 0.9, 1, 1.15, 1.3]; // gravidade que puxa o player para cima ou para baixo
 let barDistance = [190, 180, 200, 220, 240]; // distancia de uma coluna para outra
 let minLeaf = [80, 75, 70, 60, 50]; // espaço maximo para a lacuna das barras
-let barsToDarkMode = 10; // barras para atilet o dark mode
+let barsToDarkMode = 2; // barras para atilet o dark mode
 let barsToNextLevel = [1, 2, 5, 10]; // quantas barras deve consumir para aumentar o nivel
 //////////////// Configurações de jobabilidade ///////////////////
 
 let width = window.innerWidth - 20; // largura do canvas
 let height = mobile ? window.innerHeight : 270; // altura do canvas
 
+let backgroundPanel = document.getElementById("background");
+
 let maxLeaf = 110; // espaço minimo para a lacuna das barras
 
-let barColor = ["green", "red"]; // cores das barras no light e dark mode
-let boxColor = ["red", "white"]; // cores do player no light e dark mode
+let barColor = ["green", "purple"]; // cores das barras no light e dark mode
+let boxColor = ["red", "orange"]; // cores do player no light e dark mode
 let scoreColor = ["black", "white"]; // cores do player no light e dark mode
 
 let minBarHeight = 10; // altura minina de uma coluna
@@ -53,6 +55,7 @@ let areaInterval = null;
 let scoreFont = "30px Arial";
 let score = 0;
 
+let helperArea = document.getElementById("helper-text");
 let panelArea = document.getElementById("canvas-panel"); // elemento que contem o canvas do palco
 let boxArea = document.getElementById("canvas-box"); // elemento que contem o canvas do player
 
@@ -61,6 +64,21 @@ let canvasBox = boxArea.getContext("2d"); // canvas do player
 
 let bars; // Array de barras
 let bgSoundSource = null; // audiocontext da musica de fundo
+
+
+let landSpace = 100;
+
+// atribuindo a largura e altura definida aos canvass
+panelArea.height = height + landSpace;
+panelArea.width = width;
+boxArea.height = height;
+boxArea.width = width;
+
+// Div com o background
+backgroundPanel.style.width = width + "px";
+backgroundPanel.style.height = (height + landSpace) + "px";
+helperArea.style.top = (height + landSpace + 20) + "px";
+helperArea.style.width =  width + "px";
 
 let sounds = {
     "dead" : {
@@ -166,11 +184,6 @@ for(var sound in sounds) {
 }
 ////////////// Controladores de audio ////////////////
 
-// atribuindo a largura e altura definida aos canvass
-panelArea.height = height;
-panelArea.width = width;
-boxArea.height = height;
-boxArea.width = width;
 
 /**
  * Calcula um numero aleatório entre um valor minimo e o maximo
@@ -249,7 +262,7 @@ function drawArea() {
 
     canvasArea.font = scoreFont;
     canvasArea.fillStyle = currentScoreColor;
-    canvasArea.fillText("Score: " + ++score, width - 180, 30);
+    canvasArea.fillText("Score: " + parseInt(score+=0.1), width - 180, 30);
 
     canvasArea.fillText("Nível: " + (level + 1), 10, 30);
 }
@@ -298,7 +311,7 @@ function walk() {
              * necessária para entra no dark mode troco o esquema de cor
              */
             if (barsComplete % barsToDarkMode == 0) {
-                panelArea.classList.toggle("dark");
+                backgroundPanel.classList.toggle("dark-bg");
 
                 bgSoundSource.stop();
 
