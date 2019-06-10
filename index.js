@@ -13,16 +13,16 @@ let debug = true;
 //////////////// Configurações de jobabilidade ///////////////////
 let level = 0; // nivel inicial do jogo
 let levelMax = 4; // quantidade de niveis disponível (0 conta)
-let speed = [40, 30, 20, 10, 5]; // velocidade do jogo
-let boxGravity = [0.4, 0.6, 0.8, 1, 1.3]; // gravidade que puxa o player para cima ou para baixo
-let barDistance = [140, 160, 190, 220, 240]; // distancia de uma coluna para outra
-let minLeaf = [100, 90, 80, 70, 60]; // espaço maximo para a lacuna das barras
-let barsToDarkMode = 6; // barras para atilet o dark mode
-let barsToDificultScale = 2; // quantas barras deve consumir para aumentar o nivel
+let speed = [20, 15, 10, 5, 3]; // velocidade do jogo
+let boxGravity = [0.8, 0.9, 1, 1.15, 1.3]; // gravidade que puxa o player para cima ou para baixo
+let barDistance = [190, 180, 200, 220, 240]; // distancia de uma coluna para outra
+let minLeaf = [80, 75, 70, 60, 50]; // espaço maximo para a lacuna das barras
+let barsToDarkMode = 10; // barras para atilet o dark mode
+let barsToNextLevel = [1, 2, 5, 10]; // quantas barras deve consumir para aumentar o nivel
 //////////////// Configurações de jobabilidade ///////////////////
 
-let width = 600; // largura do canvas
-let height = 270; // altura do canvas
+let width = window.innerWidth - 20; // largura do canvas
+let height = window.mobileAndTabletcheck ? window.innerHeight - 20 : 270; // altura do canvas
 
 let maxLeaf = 110; // espaço minimo para a lacuna das barras
 
@@ -61,16 +61,49 @@ let sounds = {
     "dead" : {
         url : "sounds/die.mp3"
     },
-    "background" : {
+    "day" : {
         url : "sounds/background.mp3"
+    },
+    "night" : {
+        url : "sounds/background_night.mp3"
     },
     "coin" : {
         url : "sounds/coin.mp3"
     }
 }
 
+/////////////// Mobile Check ///////////////////
+window.mobileAndTabletcheck = function () {
+var check = false;
+(function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
+return check;
+};
+/////////////// Mobile Check ///////////////////
+
 ////////////// Controladores de audio ////////////////
 let soundContext = new AudioContext();
+let soundController = true;
+
+function switchSound(){
+    soundController = !soundController;
+
+    if(soundController === false){
+        document.getElementById('soundController').innerHTML = 'Off';
+        
+        if(bgSoundSource != null){
+            bgSoundSource.stop();
+        }
+
+    }else{
+        document.getElementById('soundController').innerHTML = 'On';
+        playBackGroundMusic();
+    }
+}
+
+function playBackGroundMusic(){
+    bgSoundSource = playSound(currentColorScheme === 0 ? "day" : "night", { volume: .5 });
+    bgSoundSource.loop = true;
+}
 
 function loadSound(name) {
 
@@ -92,6 +125,10 @@ function loadSound(name) {
 }
 
 function playSound(name, options) {
+
+    if(soundController === false){
+        return false;
+    }
 
     let sound = sounds[name];
     let soundVolume = sounds[name].volume || 1;
@@ -258,7 +295,16 @@ function walk() {
              */
             if (barsComplete % barsToDarkMode == 0) {
                 panelArea.classList.toggle("dark");
-                currentColorScheme = currentColorScheme === 0 ? 1 : 0;
+
+                bgSoundSource.stop();
+
+                if(currentColorScheme === 0){
+                    bgSoundSource = playSound("night", { volume: .5 });
+                    currentColorScheme = 1;
+                }else{
+                    bgSoundSource = playSound("day", { volume: .5 });
+                    currentColorScheme = 0;
+                }
 
                 if(debug){
                     console.log("Tema trocado");
@@ -266,23 +312,23 @@ function walk() {
             }
 
             /**
-             * Se a quantidade de barra completa for equivalente a quantidade
+             * Se a quantidade de barra completa for igual a quantidade
              * necessária para entra trocar o nivel, incremento o nivel
              */
-            if (barsComplete % barsToDificultScale == 0) {
+            if (level < levelMax && barsComplete == barsToNextLevel[level]) {
 
-                if (level < levelMax) {
+                // zerando o controlador de barras completa até o proximo nivel
+                barsComplete = 0;
+                ++level;
 
-                    if(debug){
-                        console.log("Level concluido");
-                    }
-
-                    ++level;
-
-                    // Altero o intervalo de tempo da renderização da area
-                    clearInterval(areaInterval);
-                    areaInterval = setInterval(walk, speed[level]);
+                if(debug){
+                    console.log("Level antingido: "+level);
                 }
+
+                // Altero o intervalo de tempo da renderização da area
+                clearInterval(areaInterval);
+                areaInterval = setInterval(walk, speed[level]);
+                
             }
         }
     }
@@ -408,8 +454,10 @@ function start() {
     currentColorScheme = 0;
     panelArea.className = "";
 
-    bgSoundSource = playSound("background", { volume: .5 });
-    bgSoundSource.loop = true;
+    if(soundController){
+        playBackGroundMusic();
+    }
+
     document.getElementById('btnStart').style.display = 'none';
 
     // Distancia que a coluna ocupa no canvas
